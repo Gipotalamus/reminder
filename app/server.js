@@ -1,7 +1,7 @@
 const app = require('./routes');
 const db = require('./db/database');
 const dbUrl =  process.env.MONGODB_URI || 'mongodb://localhost/reminder';
-const port = process.env.port || 1234;
+const port = process.env.PORT || 1234;
 
 db.connect(dbUrl)
 	.then(() => {			
