@@ -1,9 +1,10 @@
 const express = require('express');
+const fs = require('fs');
 const eventsRoute = module.exports = express.Router();
 const {getAll, add, remove, update} = require('../actions').events;
 
 eventsRoute.get('/', (req, resp) => {
-	getAll().then(enents => resp.send(enents));
+	getAll().then(events => resp.send(events));
 });
 
 eventsRoute.post('/', (req, resp) => {
