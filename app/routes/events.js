@@ -1,10 +1,14 @@
 const express = require('express');
 const fs = require('fs');
 const eventsRoute = module.exports = express.Router();
-const {getAll, add, remove, update} = require('../actions').events;
+const {getAll, getFiltered, add, remove, update} = require('../actions').events;
 
 eventsRoute.get('/', (req, resp) => {
-	getAll().then(events => resp.send(events));
+	if (req.query.type || req.query.daysLeft) { 
+		getFiltered(req.query.type, req.query.daysLeft).then(events => resp.send(events));
+	} else {
+		getAll().then(events => resp.send(events));
+	}	
 });
 
 eventsRoute.post('/', (req, resp) => {
